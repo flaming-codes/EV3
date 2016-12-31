@@ -1,0 +1,2 @@
+ev3_pae_rosjava
+-DCATKIN_DEVEL_PREFIX=/home/tom/EV3/ev3pae/devel -DCMAKE_INSTALL_PREFIX=/home/tom/EV3/ev3pae/install -G Unix Makefiles

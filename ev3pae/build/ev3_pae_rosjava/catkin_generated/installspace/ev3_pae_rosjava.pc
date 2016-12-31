@@ -1,0 +1,8 @@
+prefix=/home/tom/EV3/ev3pae/install
+
+Name: ev3_pae_rosjava
+Description: Description of ev3_pae_rosjava
+Version: 0.1.0
+Cflags: 
+Libs: -L/home/tom/EV3/ev3pae/install/lib 
+Requires: 
