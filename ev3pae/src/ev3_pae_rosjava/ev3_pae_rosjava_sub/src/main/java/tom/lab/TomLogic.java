@@ -14,16 +14,22 @@ import at.ac.univie.inf.pae.ev3ros.hardware.IHardwareAction;
 public class TomLogic {
     
     private final IHardwareAction ev3HA;
+    public static volatile boolean sonicInUse = true;
     
     public TomLogic(IHardwareAction ev3HA) {
         this.ev3HA = ev3HA;
     }
     
-    public void demo(){
-        ev3HA.drive(1000, 5000, 1);
-        ev3HA.drive(1000, 5000, 0);
-        ev3HA.drive(1000, 5000, 1);
-        ev3HA.drive(1000, 5000, 0);
+    public void demo() throws InterruptedException{
+
+        System.out.println("Starting test of ultra sonic.");
+        
+        Thread t = new Thread(new SonicDetector(ev3HA));
+        t.start();
+        
+        while(sonicInUse){
+            Thread.sleep(5000);
+        }
     }
     
     public void endLogic() {
