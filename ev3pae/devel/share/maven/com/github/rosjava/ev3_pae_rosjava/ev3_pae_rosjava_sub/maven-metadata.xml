@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <metadata>
-    <groupId>com.github.rosjava.ev3_pae_rosjava</groupId>
-    <artifactId>ev3_pae_rosjava_sub</artifactId>
-    <version>0.1.0</version>
-    <versioning>
-        <versions>
-            <version>0.1.0</version>
-        </versions>
-        <lastUpdated>20161231212130</lastUpdated>
-    </versioning>
+  <groupId>com.github.rosjava.ev3_pae_rosjava</groupId>
+  <artifactId>ev3_pae_rosjava_sub</artifactId>
+  <version>0.1.0</version>
+  <versioning>
+    <versions>
+      <version>0.1.0</version>
+    </versions>
+    <lastUpdated>20161231213243</lastUpdated>
+  </versioning>
 </metadata>

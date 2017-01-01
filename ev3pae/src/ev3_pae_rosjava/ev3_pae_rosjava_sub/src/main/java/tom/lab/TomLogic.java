@@ -22,6 +22,8 @@ public class TomLogic {
     public void demo(){
         ev3HA.drive(1000, 5000, 1);
         ev3HA.drive(1000, 5000, 0);
+        ev3HA.drive(1000, 5000, 1);
+        ev3HA.drive(1000, 5000, 0);
     }
     
     public void endLogic() {
