@@ -33,14 +33,14 @@ dependencies {
      * Tom's repo.
      */
     compile 'org.ros.rosjava_core:rosjava:[0.2,0.3)'
-    compile files('/home/tom/ev3pae/src/ev3_pae_rosjava/ev3_pae_rosjava_sub/lib/dbusjava.jar')
-    compile files('/home/tom/ev3pae/src/ev3_pae_rosjava/ev3_pae_rosjava_sub/lib/commons-cli.jar')
-    compile files('/home/tom/ev3pae/src/ev3_pae_rosjava/ev3_pae_rosjava_sub/lib/ev3classes.jar')
-    compile files('/home/tom/ev3pae/src/ev3_pae_rosjava/ev3_pae_rosjava_sub/lib/lib/ev3tools.jar')
-    compile files('/home/tom/ev3pae/src/ev3_pae_rosjava/ev3_pae_rosjava_sub/lib/lib/jcommon.jar')
-    compile files('/home/tom/ev3pae/src/ev3_pae_rosjava/ev3_pae_rosjava_sub/lib/jfreechart.jar')
-    compile files('/home/tom/ev3pae/src/ev3_pae_rosjava/ev3_pae_rosjava_sub/lib/jsch-0.1.50.jar')
-    compile files('/home/tom/ev3pae/src/ev3_pae_rosjava/ev3_pae_rosjava_sub/lib/opencv-2411.jar')
+    compile files('/home/tom/NetBeansProjects/PAE-WS16-WK2/EV3/ev3pae/src/ev3_pae_rosjava/ev3_pae_rosjava_sub/lib/dbusjava.jar')
+    compile files('/home/tom/NetBeansProjects/PAE-WS16-WK2/EV3/ev3pae/src/ev3_pae_rosjava/ev3_pae_rosjava_sub/lib/commons-cli.jar')
+    compile files('/home/tom/NetBeansProjects/PAE-WS16-WK2/EV3/ev3pae/src/ev3_pae_rosjava/ev3_pae_rosjava_sub/lib/ev3classes.jar')
+    compile files('/home/tom/NetBeansProjects/PAE-WS16-WK2/EV3/ev3pae/src/ev3_pae_rosjava/ev3_pae_rosjava_sub/lib/lib/ev3tools.jar')
+    compile files('/home/tom/NetBeansProjects/PAE-WS16-WK2/EV3/ev3pae/src/ev3_pae_rosjava/ev3_pae_rosjava_sub/lib/lib/jcommon.jar')
+    compile files('/home/tom/NetBeansProjects/PAE-WS16-WK2/EV3/ev3pae/src/ev3_pae_rosjava/ev3_pae_rosjava_sub/lib/jfreechart.jar')
+    compile files('/home/tom/NetBeansProjects/PAE-WS16-WK2/EV3/ev3pae/src/ev3_pae_rosjava/ev3_pae_rosjava_sub/lib/jsch-0.1.50.jar')
+    compile files('/home/tom/NetBeansProjects/PAE-WS16-WK2/EV3/ev3pae/src/ev3_pae_rosjava/ev3_pae_rosjava_sub/lib/opencv-2411.jar')
     /* Example of a local subproject dependency */
     /* compile project(':sibling_gradle_project') */
 }
