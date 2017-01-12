@@ -91,12 +91,14 @@ public class SensorObserver implements Observer {
 
             while (driveForward) {
 
+                // If the robot has been driving + stopping for n-times, scan the environment in advanced mode.
                 if (drivesWithoutDetection++ == drivesWithoutDetectionDefault) {
                     drivesWithoutDetection = 0;
                     initEnvironment = true;
                     advancedEnvironementalScan();
                 }
 
+                // Drive a 'step' forward.
                 ev3HA.drive(speed, pauseTimieInMillis, 1);
                 Thread.sleep(pauseTimieInMillis);
             }
@@ -120,6 +122,8 @@ public class SensorObserver implements Observer {
     /**
      * Checks the device's environment and acts accordingly.
      *  During the check, the device doesn't drive but rotate.
+     * 
+     *  (Use Case ID: 3)
      */
     private void advancedEnvironementalScan() {
         String newline = System.getProperty("line.separator");
@@ -168,6 +172,8 @@ public class SensorObserver implements Observer {
     /**
      * Check if a given condition or set of conditions is true.
      *  If so, the application has reached its lifecycle end.
+     * 
+     * (Use Case ID: 10)
      */
     private void checkTerminationCondition() {
    
@@ -182,7 +188,9 @@ public class SensorObserver implements Observer {
     }
 
     /**
-     * Listen for actions from observed objects.
+     * Listen for actions from observed objects. The containing methods
+     *  map the robots' operations to specific conditions. Conditions
+     *  are defined to the changing values accordingly.
      * 
      * @param o     The observed object sending the message.
      * @param arg   Unused in this context.
@@ -198,7 +206,7 @@ public class SensorObserver implements Observer {
             //  thus using the right set of operations.
             if (initEnvironment) {
 
-                // An obstacle is detected if it's as close as one meter at max.
+                // An obstacle is detected if it's as close as one meter at max (Use Case ID: 4).
                 if (s.sample[0] < 1.0) {
                     System.out.println("Somethings out there..");
                     
@@ -215,6 +223,7 @@ public class SensorObserver implements Observer {
             } 
             
             // The following operation applies only if the device isn't advanced-scanning its environment.
+            // It makes bypassing the detected obstacle possible (Use Case ID: 9).
             else if (s.sample[0] < .20) {
 
                 System.out.println("Detection in range of ultrasonic sensor.");
@@ -236,6 +245,7 @@ public class SensorObserver implements Observer {
             int colorID = -1;
 
             // Check if there's a matching color in the sample.
+            // This process makes sure only the most dominant color gets chosen.
             for (int j = 0; j < c.sample.length; j++) {
                 if (c.sample[j] > colorThreshold) {
                     if(highestUsedSample < c.sample[j]){
@@ -245,7 +255,7 @@ public class SensorObserver implements Observer {
                 }
             }
             
-            // If a color matching to the rules was determined, act accordingly.
+            // If a color matching to the rules was determined, act accordingly (Use Case ID: 5).
             if(colorID != -1){
                 driveForward = false;
                     System.out.println();
@@ -253,15 +263,21 @@ public class SensorObserver implements Observer {
                     switch (colorID) {
                         case 0:
                             System.out.println("Red: " + highestUsedSample);
+                            
+                            // 180° turn (Use Case ID: 8).
                             ev3HA.turnBody(750, 1350, 1);
                             ev3HA.turnBody(750, 1350, 1);
                             break;
                         case 1:
                             System.out.println("Green: " + highestUsedSample);
+                            
+                            // Turn some degrees left (Use Case ID: 6).
                             ev3HA.turnBody(350, 1000, 0);
                             break;
                         case 2:
                             System.out.println("Blue: " + highestUsedSample);
+                            
+                            // Turn some degrees right (Use Case ID: 7).
                             ev3HA.turnBody(350, 1000, 1);
                             break;
                     }
