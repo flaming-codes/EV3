@@ -1,0 +1,27 @@
+0. Wenn ROS & ROSJava noch nicht installiert sind, diese Schritte aus Christophs Anleitung übernehmen.
+
+1. Projekt über Netbeans als Github-Projekt klonen
+	- als Branch "Tom's-branch" wählen
+	- alle Standardeinstellungen übernehmen
+	- wenn fertig, Doppelklick auf Gradle-Projekt in der Sidebar
+		- danach Doppelklick auf untergeordnetes Gradle-Projekt
+		- neu erschienenes Projekt enthält die Java-Dateien
+
+2. build.gradle in .../EV3/ev3pae/src/ev3_pae_rosjava/ev3_pae_rosjava_sub wie folgt ändern:
+	- Zeichen vor .../EV3/... ändern, sodass das richtige Verzeichnis hier steht.
+
+3. Roboter einschalten und mit WLAN verbinden
+	- die angezeigte IP-Adresse in Netbeans in der Klasse "Talker" (inf.pae.ev3ros) ändern.
+
+4. Nach jeder Änderung (bzw. vor der ersten Verwendung) folgende Skripten in .../EV3/ev3pae ausführen:
+	- ./prepare.sh
+		- Beendet alle ROS-Prozesse
+		- baut das Projekt neu
+		- startet danach Roscore, in welches dann die Nodes eingespeist werden
+	- ./launch.sh 
+		- In neuem Fenster öffnen (STRG + SHIFT + T)
+		- hiermit werden die Nodes gestartet
+		- Um unser Programm auszuführen, muss folgendes eingegeben werden:
+			./launch.sh inf.pae.ev3ros.Talker
+
+5. That's it! You're a robotic-engineer!
