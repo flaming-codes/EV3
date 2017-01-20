@@ -1,0 +1,121 @@
+WICHTIGER HINWEIS:
+	In den Anleitungen werden immer generische Tutorialnamen verwendet, hier unsere Ordner/Projektnamen:
+	
+		myjava -> ev3pae
+		rosjava_catkin_package_a -> ev3_pae_rosjava
+		rosjava_gradle_subproject_a -> ev3_pae_rosjava_sub
+		my_pub_sub_tutorial -> ev3_pae_rosjava_sub
+		
+	Also alle unten genannten Namen mit diesen Namen ersetzen!	
+	
+
+1. Virtuelle Maschiene mit Ubuntu 14.04 aufsetzen
+
+2. Oracle Java 7 installieren
+	Anleitung: http://www.webupd8.org/2012/01/install-oracle-java-jdk-7-in-ubuntu-via.html
+	Kurzfassung:
+		Folgende Befehle ins Terminal tippen/kopieren:
+			sudo add-apt-repository ppa:webupd8team/java
+			sudo apt-get update
+			sudo apt-get install oracle-java7-installer
+
+3. ROS installieren
+	Anleitung: http://wiki.ros.org/indigo/Installation/Ubuntu
+	Kurzfassung:
+		Folgende Befehle ins Terminal tippen/kopieren:
+			sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu $(lsb_release -sc) main" > /etc/apt/sources.list.d/ros-latest.list'
+			sudo apt-key adv --keyserver hkp://ha.pool.sks-keyservers.net --recv-key 421C365BD9FF1F717815A3895523BAEEB01FA116
+			sudo apt-get update
+			sudo apt-get install ros-indigo-desktop-full
+			sudo rosdep init
+			rosdep update
+			echo "source /opt/ros/indigo/setup.bash" >> ~/.bashrc
+			source ~/.bashrc
+			(optional und für uns nicht benötigt so weit ich weiß): sudo apt-get install python-rosinstall
+
+4. ROSjava installieren
+	Anleitung: http://wiki.ros.org/rosjava/Tutorials/indigo/Deb%20Installation
+	Kurzfassung:
+		Folgende Befehle ins Terminal tippen/kopieren:
+			sudo apt-get install ros-indigo-rosjava
+			mkdir -p ~/myjava/src
+			cd ~/myjava/src
+			source /opt/ros/indigo/setup.bash
+			catkin_init_workspace
+			cd ~/myjava
+			catkin_make
+			
+5. ROSjava Packet initialisieren
+	Hinweis zur (online) Anleitung: Nicht das Package b erzeugen, wir brauchen ja nur eines.
+	Anleitung: http://wiki.ros.org/rosjava_build_tools/Tutorials/indigo/Creating%20Rosjava%20Packages
+	Kurzfassung:
+		Mit dem Terminal in den oben kreierten Ordner gehn (im Beispiel "myjava")
+		Folgende Befehle ins Terminal tippen/kopieren:
+			mkdir -p src
+			cd src
+			catkin_create_rosjava_pkg rosjava_catkin_package_a
+			cd ..
+			catkin_make
+			source devel/setup.bash
+			cd src/rosjava_catkin_package_a
+			catkin_create_rosjava_project rosjava_gradle_subproject_a
+			cd ../..
+			catkin_make
+			
+6. Netbeans installieren
+	Netbeans 8.0.2 für Linux unter https://netbeans.org/downloads/8.0.2/ runterladen (zur Sicherheit würd ich "all" laden, auch wenn wir nur Java brauchen)
+	Im Terminal folgendes tippen:
+		chmod +x <installer-file-name>
+		./<installer-file-name>
+		
+7. Netbeans Java Support aktivieren
+	In der Menüleiste: Tools -> Options -> Java -> activate
+	
+8. Projekt in Netbeans importieren
+	In den oben erstellten Ordner "src" navigieren
+	Projekt doppelklicken
+	Das Projekt ausklappen und unter Subprojects das oben erstellte Subproject doppelklicken
+	
+9. Dependency einfügen
+	Im Projekt unter "Build Scripts" im Ordner "Project" build.gradle öffnen
+	Unter "compile 'org.ros.rosjava_core:rosjava:[0.2,0.3)'" folgende Zeile einfügen:
+	compile file('<Pfad zur lejos jar>')
+	Speichern & Netbeans neustarten
+	
+10. Projekt kompilieren
+	Mit dem Terminal ins Hauptverzeichnis des Projekts (im Beispiel "myjava") navigieren
+	Folgendes ins Terminal eintippen/kopieren:
+		source devel/setup.bash
+		catkin_make
+	Tipp vom Herrn Gaber: source devel/setup.bash in .bashrc einfügen:
+		Ins absolute Hauptverzeichnis wechseln (einfach ein neues Terminal öffnen)
+		Per Befehl "nano .bashrc" bashrc im Editor öffnen
+		Unter "source devel/setup.bash" "~/myjava/devel/setup.bash" einfügen
+		
+11. Projekt ausführen:
+	Anleitung (nur 1.2): http://wiki.ros.org/rosjava_build_tools/Tutorials/indigo/WritingPublisherSubscriber%28Java%29
+	Kurzfassung:
+		Folgende Befehle (ausgehend vom Projekt-Hauptverzeichnis (im Beispiel myjava)) in mehrere Terminals tippen/kopieren (für den roscore eines, für den Talker eines und für den Listener eines):
+			roscore &
+			cd src/rosjava_catkin_package_a/my_pub_sub_tutorial
+			cd build/install/my_pub_sub_tutorial/bin
+			./my_pub_sub_tutorial com.github.rosjava.rosjava_catkin_package_a.my_pub_sub_tutorial.Talker &
+			./my_pub_sub_tutorial com.github.rosjava.rosjava_catkin_package_a.my_pub_sub_tutorial.Listener &
+
+12. Mit github synchronisieren
+	TODO
+
+
+
+Oft gebrauchte Shortcuts:
+
+	catkin_make
+
+	roscore &
+
+	rosnode kill /rosjava/talker
+
+	cd ev3pae/src/ev3_pae_rosjava/ev3_pae_rosjava_sub/build/install/ev3_pae_rosjava_sub/bin
+	./ev3_pae_rosjava_sub at.ac.univie.inf.pae.ev3ros.Talker
+	
+		
